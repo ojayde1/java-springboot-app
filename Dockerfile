@@ -33,7 +33,7 @@ WORKDIR /app
 
 # IMPORTANT: Replace 'springboot-k8s-demo-0.0.1-SNAPSHOT.jar' with your actual JAR filename.
 # It's based on your <artifactId>-<version>.jar
-COPY --from=builder /app/target/springboot-k8s-demo-0.0.1-SNAPSHOT.jar ./app.jar
+COPY --from=builder /app/target/springboot-k8s-demo.jar ./app.jar
 
 # Define the command to run your Java application when the container starts.
 CMD ["java", "-jar", "app.jar"]
