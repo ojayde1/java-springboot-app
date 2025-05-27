@@ -1,6 +1,6 @@
 # --- Stage 1: Builder ---
 # Use a Maven image with OpenJDK 8 for building and compiling a Java 8 app.
-FROM maven:3.9.5-openjdk-8-slim AS builder
+FROM maven:3-openjdk-8 AS builder
 
 # Set the working directory inside the container for this stage.
 WORKDIR /app
