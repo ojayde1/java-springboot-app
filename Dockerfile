@@ -12,16 +12,10 @@ COPY pom.xml ./
 # IMPORTANT: This must happen BEFORE any 'mvn' commands that compile or package.
 COPY src ./src
 
-# Download dependencies and compile/install the project.
-# Since the source code is now present, Maven can find the main class.
-RUN mvn dependency:go-offline && mvn clean install -DskipTests
-
-# Re-run the build to package the application into a JAR file.
-# This step will produce the executable JAR in the 'target/' directory.
-# Your final JAR is likely named 'springboot-k8s-demo-0.0.1-SNAPSHOT.jar'
-# based on your pom.xml's artifactId and version.
-RUN mvn package -Dmaven.test.skip=true
-
+# Build the application and package it into a JAR file.
+# This single command will compile, run tests (if not skipped), and create the JAR.
+# The JAR will be in /app/target/springboot-k8s-demo-0.0.1-SNAPSHOT.jar
+RUN mvn clean package -Dmaven.test.skip=true
 
 # --- Stage 2: Runner (Production Image) ---
 FROM openjdk:8-jre-alpine
